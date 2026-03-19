@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 const PORT = 5000;
 
 mongoose
-  .connect("mongodb://localhost:27017")
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("MongoDB Connected");
     app.listen(PORT, () => {

@@ -5,7 +5,7 @@ import DataTable, { Column } from "../components/DataTable";
 import Pagination from "../components/Pagination";
 import SearchFilter from "../components/SearchFilter";
 import PolicyDetailsModal from "../components/PolicyDetailsModal";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 const PolicyDashboard = () => {
@@ -23,6 +23,7 @@ const PolicyDashboard = () => {
 
     useEffect(() => {
         fetchPolicies();
+        // eslint-disable-next-line
     }, [page, searchTerm, status])
 
     useEffect(() => {
