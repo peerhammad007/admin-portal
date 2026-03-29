@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const policyRoutes = require("./routes/policyRoutes");
+const policyRoutes = require("./modules/policies/policy.routes");
 const { default: mongoose } = require("mongoose");
 dotenv.config();
 const app = express();

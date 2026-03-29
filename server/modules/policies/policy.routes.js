@@ -1,5 +1,5 @@
 const express = require('express');
-const { getPolicies, getPolicyById, createPolicy } = require('../controllers/policyController');
+const { getPolicies, getPolicyById, createPolicy } = require('../policies/policy.controller');
 const router = express.Router();
 
 router.get('/policy', getPolicies);

@@ -3,13 +3,13 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react';
 import axios from 'axios';
-import StepOne from '../components/steps/StepOne';
-import StepTwo from '../components/steps/StepTwo';
-import StepThree from '../components/steps/StepThree';
-import ReviewStep from '../components/steps/ReviewStep';
+import StepOne from '../features/policies/components/wizard/StepOne';
+import StepTwo from '../features/policies/components/wizard/StepTwo';
+import StepThree from '../features/policies/components/wizard/StepThree';
+import ReviewStep from '../features/policies/components/wizard/ReviewStep';
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../store/index'
-import { clearDraft, saveDraft } from '../features/Policy/policySlice';
+import { RootState } from '../app/index'
+import { clearDraft, saveDraft } from '../features/policies/store/policySlice';
 
 
 const PolicySchema = z.object({

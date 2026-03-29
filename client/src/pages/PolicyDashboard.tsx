@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
-import { Policy } from "../types/Policy";
+import { useCallback, useEffect, useMemo, useState } from "react"
+import { Policy } from "../features/policies/types/Policy";
 import axios from 'axios'
-import DataTable, { Column } from "../components/DataTable";
-import Pagination from "../components/Pagination";
+import DataTable, { Column } from "../shared/components/DataTable";
+import Pagination from "../shared/components/Pagination";
 import SearchFilter from "../components/SearchFilter";
-import PolicyDetailsModal from "../components/PolicyDetailsModal";
+import PolicyDetailsModal from "../features/policies/components/PolicyDetailsModal";
 import { useNavigate } from 'react-router-dom'
 
 
@@ -63,19 +63,25 @@ const PolicyDashboard = () => {
         navigate('/addPolicy');
     }
 
-    const columns: Column<Policy>[] = [
+    // OPTIMIZATION 1: Memoize the row click handler so it maintains the same reference
+    const handleRowClick = useCallback((row: Policy) => {
+            setSelectedPolicyId(row._id) // Empty dependency array because setSelectedPolicyId is stable
+        }, []);
+    // OPTIMIZATION 2: Wrap the array in useMemo. 
+    // The empty dependency array [] means it will only be created on the very first render.
+    const columns = useMemo<Column<Policy>[]>(() => [
         { header: "Policy Number", accessor: "policyNumber" },
         { header: "Customer Name", accessor: "customerName" },
         { header: "Premium", accessor: "premiumAmount" },
         { header: "Status", accessor: "status" },
-    ];
+    ], []);
 
     return (
         <div>
             <h2>Policy</h2>
             <button onClick={handleAddPolicy}>Add Policy</button>
             <SearchFilter searchTerm={searchInput} onSearchTermChange={setSearchInput} status={status} onStatusChange={setStatus} />
-            <DataTable columns={columns} data={policies} loading={loading} onRowClick={(row) => setSelectedPolicyId(row._id)} />
+            <DataTable columns={columns} data={policies} loading={loading} onRowClick={handleRowClick} />
             <Pagination totalPages={totalPages} current={page} onPageChange={setPage} />
             {selectedPolicyId && (
                 <PolicyDetailsModal selectedPolicyId={selectedPolicyId} onClose={() => setSelectedPolicyId(null)} />

@@ -1,5 +1,5 @@
 import {UseFormRegister, FieldErrors} from 'react-hook-form'
-import { PolicyFormData } from '../../pages/AddPolicyWizard';
+import { PolicyFormData } from '../../../../pages/AddPolicyWizard';
 interface StepProps {
     register: UseFormRegister<PolicyFormData>,
     errors:FieldErrors<PolicyFormData>,

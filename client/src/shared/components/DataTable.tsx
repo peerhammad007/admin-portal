@@ -1,3 +1,4 @@
+import React from "react";
 
 export interface Column<T> {
     header: string,
@@ -11,13 +12,13 @@ interface DataTableProps<T> {
     onRowClick?: (row: T) => void
 }
 
-const DataTable = <T,>({columns, data, loading, onRowClick}: DataTableProps<T>) => {
-    if(loading) {
+const DataTable = <T,>({ columns, data, loading, onRowClick }: DataTableProps<T>) => {
+    if (loading) {
         return (
             <div>Loading...</div>
         )
     }
-    if(data.length === 0) {
+    if (data.length === 0) {
         <div>No records found</div>
     }
     return (
@@ -42,4 +43,4 @@ const DataTable = <T,>({columns, data, loading, onRowClick}: DataTableProps<T>) 
     )
 }
 
-export default DataTable;
+export default React.memo(DataTable) as typeof DataTable;

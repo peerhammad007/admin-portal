@@ -1,4 +1,4 @@
-import { PolicyFormData } from "../../pages/AddPolicyWizard";
+import { PolicyFormData } from "../../../../pages/AddPolicyWizard";
 
 interface ReviewStepProps {
   data: PolicyFormData;
