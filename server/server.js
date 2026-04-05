@@ -3,11 +3,13 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const policyRoutes = require("./modules/policies/policy.routes");
 const { default: mongoose } = require("mongoose");
+const errorHandler = require("./middleware/error.middleware");
 dotenv.config();
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(errorHandler)
 app.use(policyRoutes);
 app.get("/", (req, res) => {
   res.send("Server is running...");
