@@ -61,8 +61,30 @@ const createPolicy = async (data) => {
   return policyRepository.createPolicy(data);
 };
 
+const getPolicyStats = async () => {
+  const stats = await policyRepository.getPolicyStats();
+  const result = {
+    totalPolicies: 0,
+    activePolicies: 0,
+    pendingPolicies: 0,
+    expiredPolicies: 0,
+    totalPremium: 0,
+  };
+
+  stats.forEach((item) => {
+    result.totalPolicies += item.count;
+    result.totalPremium += item.premiumAmount;
+
+    if (item.status === "active") result.activePolicies = item.count;
+    if (item.status === "pending") result.pendingPolicies = item.count;
+    if (item.status === "expired") result.expiredPolicies = item.count;
+  });
+  return result;
+};
+
 module.exports = {
   getPolicies,
   getPolicyById,
   createPolicy,
+  getPolicyStats,
 };

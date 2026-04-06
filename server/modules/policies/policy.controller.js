@@ -27,8 +27,18 @@ const createPolicy = async (req, res, next) => {
   }
 };
 
+const getPolicyStats = async (req, res, next) => {
+  try {
+    const stats = await policyService.getStats();
+    res.json({ success: true, data: stats });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getPolicies,
   getPolicyById,
   createPolicy,
+  getPolicyStats,
 };
